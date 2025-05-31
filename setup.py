@@ -16,5 +16,5 @@ setup(
     author_email='vrushal.more.work@gmail.com',
     packages = find_packages(),
     install_requires = get_requirements('requirements.txt'),
-    description='A package for various utilities and tools' ``
+    description='A package for various utilities and tools' 
 )
