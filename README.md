@@ -198,7 +198,7 @@ From the above image , the engineered features =  [ Natural Resource Score, Humi
 * Each model is evaluated on the test set.
 * The model with the **highest accuracy** (above a threshold, e.g., 60%) is selected.
 
-### *8.4. Model Evaluation**
+### **8.4. Model Evaluation**
 
 * Performance metrics like `accuracy_score` are computed on test data.
 * Optionally supports:
