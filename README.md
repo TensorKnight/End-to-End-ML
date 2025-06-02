@@ -161,9 +161,9 @@ From the above image , the engineered features =  [ Natural Resource Score, Humi
 
 ---
 
-## 9. Pipeline
+## 8. Pipeline
 
-### **9.0. Data Ingestion**
+### **8.0. Data Ingestion**
 
 * The raw data is collected from CSV or external data sources.
 * The ingestion module is responsible for reading the data and splitting it into training and test datasets.
@@ -173,7 +173,7 @@ From the above image , the engineered features =  [ Natural Resource Score, Humi
   * `test.csv`
   *  `data.csv`
 
-### **9.1. Data Validation**
+### **8.1. Data Validation**
 
 * Schema validation is performed to check for:
 
@@ -181,7 +181,7 @@ From the above image , the engineered features =  [ Natural Resource Score, Humi
   * Missing or null values.
 * Basic data quality checks ensure the dataset is ready for preprocessing.
 
-### **9.2. Data Transformation**
+### **8.2. Data Transformation**
 
 * Feature engineering and preprocessing steps are applied:
 
@@ -189,7 +189,7 @@ From the above image , the engineered features =  [ Natural Resource Score, Humi
   * Encoding categorical features.
   * Handling imbalanced data.
 
-### **9.3. Model Training**
+### **8.3. Model Training**
 
 * Multiple classification models are trained on the transformed training data.
 * A common interface trains the following models:
@@ -198,7 +198,7 @@ From the above image , the engineered features =  [ Natural Resource Score, Humi
 * Each model is evaluated on the test set.
 * The model with the **highest accuracy** (above a threshold, e.g., 60%) is selected.
 
-### **9.4. Model Evaluation**
+### *8.4. Model Evaluation**
 
 * Performance metrics like `accuracy_score` are computed on test data.
 * Optionally supports:
@@ -206,12 +206,12 @@ From the above image , the engineered features =  [ Natural Resource Score, Humi
   * Hyperparameter tuning via grid search.
   
 
-### **9.5. Model Serialization**
+### **8.5. Model Serialization**
 
 * The best model is serialized using `joblib`.
 * Stored in the `artifacts/` directory as `model.pkl`.
 
-### **9.6. Prediction Pipeline **
+### **8.6. Prediction Pipeline**
 
 * A separate prediction module takes new data from API.
 * Applies the same transformations.
@@ -220,9 +220,9 @@ From the above image , the engineered features =  [ Natural Resource Score, Humi
 
 ---
 
-## 10. **Evalutation Metrics & Results**
+## 9. **Evalutation Metrics & Results**
 
-### 10.0. **Metrics Used**
+### 9.0. **Metrics Used**
 
 The following standard classification metrics were employed to evaluate and compare model performance:
 
@@ -233,7 +233,7 @@ The following standard classification metrics were employed to evaluate and comp
 * **F1-Score**: Harmonic mean of Precision and Recall — balances both.
 * **Time (s)**: Time taken to train and evaluate the model (performance + computational efficiency).
 
-### 10.1. **Evaluation Results**
+### 9.1. **Evaluation Results**
 
 | Model                  | Accuracy | AUC   | Precision | Recall | F1 Score   | Time (s) |
 | ---------------------- | -------- | ----- | --------- | ------ | ---------- | -------- |
@@ -253,7 +253,7 @@ The following standard classification metrics were employed to evaluate and comp
 | **LDA**                | 0.895    | 0.987 | 0.915     | 0.789  | 0.8476     | 0.023    |
 
 
-### 10.2. **Best Model**
+### 9.2. **Best Model**
 
 * **Model**: Support Vector Machine (SVM)
 * **F1 Score**: `0.99865`
@@ -261,16 +261,16 @@ The following standard classification metrics were employed to evaluate and comp
 
 ---
 
-## 11. Model Deployment
+## 10. Model Deployment
 
-### 11.0 **Deployment Stack**
+### 10.0 **Deployment Stack**
 
 * **Backend**: Flask (Python micro-framework)
 * **Serialization**: `joblib` for saving and loading both model and preprocessor objects.
 * **Frontend**: HTML templates rendered using Flask (`index.html`)
 * **API**: REST-style endpoint at `/predict` accepts JSON payloads.
 
-### 11.1 **Functional Workflow**
+### 10.1 **Functional Workflow**
 
 * When a user inputs feature values via the UI or API:
 
@@ -284,14 +284,14 @@ The following standard classification metrics were employed to evaluate and comp
   * The **loaded model** (`model.pkl`) predicts the outcome.
   * The result is returned either as a webpage or JSON.
 
-### 11.2 **Key Files**
+### 10.2 **Key Files**
 
 * `app.py`: Flask application script.
 * `artifacts/preprocessor.pkl`: Pre-fitted preprocessing pipeline.
 * `artifacts/model.pkl`: Final trained model.
 * `templates/index.html`: Web interface for user input.
 
-### 11.3 **Prediction Endpoint**
+### 10.3 **Prediction Endpoint**
 
 * **Route**: `/predict`
 * **Method**: `POST`
@@ -314,7 +314,7 @@ The following standard classification metrics were employed to evaluate and comp
 
 ---
 
-### 12. **License**
+### 11. **License**
 
 This project is licensed under the [MIT License](LICENSE).
 
