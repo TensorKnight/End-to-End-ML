@@ -309,7 +309,7 @@ The following standard classification metrics were employed to evaluate and comp
 
 | Output 1                               | Output 2                               |
 | -------------------------------------- | -------------------------------------- |
-| ![Output Image 1](results/output/delhi_0.png) | ![Output Image 2](path/to/output2.png) |
+| ![Output Image 1](results/output/delhi_0.png) | ![Output Image 2](results/output/mumbai_0.png) |
 
 
 ---
