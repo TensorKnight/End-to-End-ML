@@ -1,6 +1,9 @@
 setup.py
 notebooks/datasets
 src/logs
-src/__init__.py
-src/components/__init__.py
-src/pipeline/__init__.py
+src/__pycache__
+src/components/__pycache__
+src/pipeline/__pycache__
+artifacts
+catboost_info
+results

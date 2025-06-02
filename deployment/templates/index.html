@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MosquiNET</title>
+<style>
+  :root {
+    --blue: #007BFF;
+    --blue-dark: #0056b3;
+    --red: #dc3545;
+    --green: #28a745;
+    --bg-dark: #121212;
+    --text-light: #eee;
+    --text-dark: #222;
+    --input-bg: #222;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #000;
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+  header {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  header h1 {
+    color: var(--blue);
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+  }
+  .brand-white {
+    color: white;
+  }
+  .brand-blue {
+    color: var(--blue);
+  }
+
+  header p {
+    margin-top: 0.2rem;
+    color: #aaa;
+    font-weight: 400;
+  }
+
+  form {
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  input[type="range"] {
+    width: 100%;
+  }
+
+  input[type="text"], select {
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    background: var(--input-bg);
+    border: none;
+    border-radius: 8px;
+    color: var(--text-light);
+    font-size: 1rem;
+    outline-offset: 2px;
+    transition: outline-color 0.3s;
+  }
+
+  input[type="text"]:focus, select:focus {
+    outline: 2px solid var(--blue);
+  }
+
+  button {
+    background: var(--blue);
+    border: none;
+    color: white;
+    padding: 0.9rem 0;
+    font-weight: 700;
+    font-size: 1.2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background: var(--blue-dark);
+  }
+
+  .banner {
+    max-width: 900px;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-weight: 700;
+    font-size: 1.25rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    position: relative;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeIn 0.5s ease forwards;
+  }
+
+  .banner.red {
+    background-color: var(--red);
+    color: #fff;
+  }
+
+  .banner.green {
+    background-color: var(--green);
+    color: #fff;
+  }
+
+  .banner button.close-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.3rem;
+    color: inherit;
+    cursor: pointer;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-10px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+  @media (max-width: 500px) {
+    form {
+      padding: 1rem;
+      gap: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1><span class="brand-white">Mosqui</span><span class="brand-blue">NET</span></h1>
+</header>
+
+<div id="banner" style="display:none;"></div>
+
+<form id="predictForm">
+  <div>
+    <label for="city_name">Enter your city name:</label>
+    <input type="text" id="city_name" name="city_name" placeholder="e.g. Mumbai" autocomplete="off" />
+  </div>
+  <div>
+    <label for="daily_min_temp">Daily Min Temp (°C): <span id="minTempVal">0</span></label>
+    <input type="range" id="daily_min_temp" name="daily_min_temp" min="-100" max="100" step="0.1" value="0" oninput="minTempVal.innerText=this.value"/>
+  </div>
+  <div>
+    <label for="daily_max_temp">Daily Max Temp (°C): <span id="maxTempVal">0</span></label>
+    <input type="range" id="daily_max_temp" name="daily_max_temp" min="-100" max="100" step="0.1" value="0" oninput="maxTempVal.innerText=this.value"/>
+  </div>
+  <div>
+    <label for="daily_avg_temp">Daily Avg Temp (°C): <span id="avgTempVal">0</span></label>
+    <input type="range" id="daily_avg_temp" name="daily_avg_temp" min="-100" max="100" step="0.1" value="0" oninput="avgTempVal.innerText=this.value"/>
+  </div>
+  <div>
+    <label for="total_precipitation">Total Precipitation (mm): <span id="precipitationVal">0</span></label>
+    <input type="range" id="total_precipitation" name="total_precipitation" min="0" max="500" step="0.1" value="0" oninput="precipitationVal.innerText=this.value"/>
+  </div>
+  <div>
+    <label for="relative_humidity">Relative Humidity (%): <span id="humidityVal">0</span></label>
+    <input type="range" id="relative_humidity" name="relative_humidity" min="0" max="100" step="0.1" value="0" oninput="humidityVal.innerText=this.value"/>
+  </div>
+  <div>
+    <label for="population_density">Population Density (per km²): <span id="popDensityVal">0</span></label>
+    <input type="range" id="population_density" name="population_density" min="0" max="100000" step="10" value="0" oninput="popDensityVal.innerText=this.value"/>
+  </div>
+  <div>
+    <label for="day_length">Day Length (hours): <span id="dayLengthVal">0</span></label>
+    <input type="range" id="day_length" name="day_length" min="0" max="24" step="0.1" value="0" oninput="dayLengthVal.innerText=this.value"/>
+  </div>
+
+  <div>
+    <label for="water_bodies">Water Bodies:</label>
+    <select id="water_bodies" name="water_bodies">
+      <option value="0">No</option>
+      <option value="1">Yes</option>
+    </select>
+  </div>
+  <div>
+    <label for="urban_rural_area">Urban / Rural Area:</label>
+    <select id="urban_rural_area" name="urban_rural_area">
+      <option value="0">Rural</option>
+      <option value="1">Urban</option>
+    </select>
+  </div>
+  <div>
+    <label for="forested_area">Forested Area:</label>
+    <select id="forested_area" name="forested_area">
+      <option value="0">No</option>
+      <option value="1">Yes</option>
+    </select>
+  </div>
+  <div>
+    <label for="crop_area">Crop Area:</label>
+    <select id="crop_area" name="crop_area">
+      <option value="0">No</option>
+      <option value="1">Yes</option>
+    </select>
+  </div>
+  <div>
+    <label for="graze_land_area">Graze Land Area:</label>
+    <select id="graze_land_area" name="graze_land_area">
+      <option value="0">No</option>
+      <option value="1">Yes</option>
+    </select>
+  </div>
+
+  <button type="submit">Predict Risk</button>
+</form>
+
+<script>
+  const form = document.getElementById('predictForm');
+  const banner = document.getElementById('banner');
+
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    let data = {};
+    formData.forEach((value, key) => {
+      if (key === 'city_name') return;
+      if(['water_bodies', 'urban_rural_area', 'forested_area', 'crop_area', 'graze_land_area'].includes(key)) {
+        data[key] = parseInt(value);
+      } else {
+        data[key] = parseFloat(value);
+      }
+    });
+
+    const response = await fetch('/predict', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    const city = formData.get('city_name').trim() || 'Your locality';
+
+    if(result.prediction === 1) {
+      banner.className = 'banner red';
+      banner.innerHTML = `<span>${city} has a HIGH risk of mosquito-borne disease outbreak.</span><button class="close-btn" aria-label="Close message">&times;</button>`;
+      form.style.display = 'none';
+    } else {
+      banner.className = 'banner green';
+      banner.innerHTML = `<span>${city} is SAFE from mosquito-borne disease risk at the moment.</span><button class="close-btn" aria-label="Close message">&times;</button>`;
+      form.style.display = 'none';
+    }
+
+    banner.querySelector('button.close-btn').onclick = () => {
+      banner.style.display = 'none';
+      form.style.display = 'flex';
+    };
+    banner.style.display = 'flex';
+  };
+</script>
+</body>
+</html>

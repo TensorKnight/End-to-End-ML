@@ -1,0 +1,12 @@
+2025-06-01 13:24:41,397 - numexpr.utils - INFO - NumExpr defaulting to 4 threads.
+2025-06-01 13:24:47,512 - root - INFO - Entered the data ingestion method or component
+2025-06-01 13:24:47,546 - root - INFO - Read the dataset as dataframe
+2025-06-01 13:24:47,583 - root - INFO - Train test split initiated
+2025-06-01 13:24:47,633 - root - INFO - Ingestion of the data iss completed
+2025-06-01 13:24:47,644 - root - INFO - Read train and test data completed
+2025-06-01 13:24:47,644 - root - INFO - Obtaining preprocessing object
+2025-06-01 13:24:47,644 - root - INFO - Numerical columns: ['Daily Min Temp', 'Daily Max Temp', 'Daily Avg Temp', 'Total Precipitation', 'Relative Humidity', 'Population Density', 'Day Length', 'Natural Resource Score', 'Humidity_Temp']
+2025-06-01 13:24:47,645 - root - INFO - Categorical columns: ['Water Bodies', 'Urban / Rural Area', 'Forested Area', 'Crop Area', 'Graze Land Area']
+2025-06-01 13:24:47,649 - root - INFO - Applying preprocessing object on train and test data
+2025-06-01 13:24:47,684 - root - INFO - Saving preprocessing object
+2025-06-01 13:24:47,691 - root - INFO - Split training and test input data

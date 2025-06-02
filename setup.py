@@ -13,8 +13,7 @@ setup(
     name='vrushal',
     version='0.0.1',
     author='Vrushal More',
-    author_email='vrushal.more.work@gmail.com',
+    author_email='will be added later',
     packages = find_packages(),
-    install_requires = get_requirements('requirements.txt'),
-    description='A package for various utilities and tools' 
+    install_requires = get_requirements('requirements.txt')
 )
