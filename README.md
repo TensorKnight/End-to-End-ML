@@ -41,6 +41,7 @@ Vector-borne diseases such as dengue, malaria, and chikungunya continue to pose 
 ### 3.1. Solution 
  
 MosquiNET offers a data-driven approach to preventing mosquito-borne diseases by predicting regions that are favorable for mosquito habitation. This predictive insight empowers public health officials, urban planners, and communities with timely, actionable information.
+
 ---
 
 ## 4. Teck Stack
@@ -143,7 +144,7 @@ From the above image , the engineered features =  [ Natural Resource Score, Humi
   * The model with the **highest f1 score** was selected as the **final model**.
   * A minimum threshold of **60% accuracy** was set to ensure the model's reliability. If no model met the threshold, training was considered unsuccessful.
 
-###  **7.2. **Hyperparameter Tuning Strategy**:
+###  **7.2. Hyperparameter Tuning Strategy**:
 
   * Predefined hyperparameter grids were configured for each model.
   * Tuning parameters:

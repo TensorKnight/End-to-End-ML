@@ -6,4 +6,3 @@ src/components/__pycache__
 src/pipeline/__pycache__
 artifacts
 catboost_info
-results
