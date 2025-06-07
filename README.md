@@ -159,7 +159,6 @@ From the above image , the engineered features =  [ Natural Resource Score, Humi
   * The `evaluate_models()` function supports `GridSearchCV` for exhaustive search over the defined grids.
   * Hyperparameter tuning is currently **disabled for speed** during initial evaluation but can be **enabled** for fine-tuning in production.
 
----
 ### **7.3 Transfer Learning Block**
 
 To leverage prior knowledge and improve generalization, a **Transfer Learning** block was integrated into the pipeline. The goal was to assess whether features or representations from external datasets (pretrained models) could enhance predictions on mosquito habitability.
@@ -172,6 +171,8 @@ To leverage prior knowledge and improve generalization, a **Transfer Learning** 
 - Performance was benchmarked against traditional training from scratch to assess benefit.
 
 *Result*: While traditional models already achieved high scores, transfer learning helped validate generalizability and opened future directions for integrating external knowledge sources.
+
+---
 
 ## 8. Pipeline
 
