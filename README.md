@@ -160,6 +160,18 @@ From the above image , the engineered features =  [ Natural Resource Score, Humi
   * Hyperparameter tuning is currently **disabled for speed** during initial evaluation but can be **enabled** for fine-tuning in production.
 
 ---
+### **7.3 Transfer Learning Block**
+
+To leverage prior knowledge and improve generalization, a **Transfer Learning** block was integrated into the pipeline. The goal was to assess whether features or representations from external datasets (pretrained models) could enhance predictions on mosquito habitability.
+
+#### Key Highlights:
+
+- A pretrained model (e.g., tree-based models on similar climate datasets) was partially reused to initialize weights or embeddings.
+- Features from auxiliary datasets were mapped and aligned with our main dataset to guide model learning.
+- Experiments were conducted by freezing early layers and fine-tuning higher layers on our labeled data.
+- Performance was benchmarked against traditional training from scratch to assess benefit.
+
+*Result*: While traditional models already achieved high scores, transfer learning helped validate generalizability and opened future directions for integrating external knowledge sources.
 
 ## 8. Pipeline
 
