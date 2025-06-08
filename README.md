@@ -175,10 +175,6 @@ To explore enhanced generalization and leverage pretrained knowledge, a **Transf
 - This performance matched or exceeded top-performing traditional models like LGBM and CatBoost.
 - These results confirm the potential of transfer learning in environmental and climate-related health risk predictions.
 
-Here’s the **Ensemble Modeling Strategy** section rewritten using bullet points for clarity:
-
----
-
 ### 7.4. Ensemble Modeling Strategy
 
 * Implemented a **simple ensemble selection mechanism** to choose the best model dynamically at runtime.
