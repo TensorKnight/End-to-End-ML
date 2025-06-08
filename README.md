@@ -332,10 +332,6 @@ The following standard classification metrics were employed to evaluate and comp
 * **Input format**: JSON
 * **Output**: JSON response with predicted value
 
-Here's a bullet-point version of that concept for your README:
-
----
-
 ### 10.4 Feedback-Driven Model Improvement
 
 * Integrated a **user feedback mechanism** post-prediction to collect real-world inputs.
