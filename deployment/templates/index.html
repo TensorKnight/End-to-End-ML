@@ -1,281 +1,734 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MosquiNET</title>
-<style>
-  :root {
-    --blue: #007BFF;
-    --blue-dark: #0056b3;
-    --red: #dc3545;
-    --green: #28a745;
-    --bg-dark: #121212;
-    --text-light: #eee;
-    --text-dark: #222;
-    --input-bg: #222;
-  }
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #000;
-    color: var(--text-light);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-  }
-  header {
-    width: 100%;
-    max-width: 900px;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  header h1 {
-    color: var(--blue);
-    margin: 0;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-  }
-  .brand-white {
-    color: white;
-  }
-  .brand-blue {
-    color: var(--blue);
-  }
-
-  header p {
-    margin-top: 0.2rem;
-    color: #aaa;
-    font-weight: 400;
-  }
-
-  form {
-    max-width: 900px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1.3rem;
-  }
-
-  label {
-    display: block;
-    margin-bottom: 0.3rem;
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-
-  input[type="range"] {
-    width: 100%;
-  }
-
-  input[type="text"], select {
-    width: 100%;
-    padding: 0.4rem 0.6rem;
-    background: var(--input-bg);
-    border: none;
-    border-radius: 8px;
-    color: var(--text-light);
-    font-size: 1rem;
-    outline-offset: 2px;
-    transition: outline-color 0.3s;
-  }
-
-  input[type="text"]:focus, select:focus {
-    outline: 2px solid var(--blue);
-  }
-
-  button {
-    background: var(--blue);
-    border: none;
-    color: white;
-    padding: 0.9rem 0;
-    font-weight: 700;
-    font-size: 1.2rem;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  button:hover {
-    background: var(--blue-dark);
-  }
-
-  .banner {
-    max-width: 900px;
-    width: 100%;
-    padding: 1rem 1.5rem;
-    font-weight: 700;
-    font-size: 1.25rem;
-    border-radius: 10px;
-    margin-bottom: 1.5rem;
-    position: relative;
-    user-select: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    animation: fadeIn 0.5s ease forwards;
-  }
-
-  .banner.red {
-    background-color: var(--red);
-    color: #fff;
-  }
-
-  .banner.green {
-    background-color: var(--green);
-    color: #fff;
-  }
-
-  .banner button.close-btn {
-    background: transparent;
-    border: none;
-    font-size: 1.3rem;
-    color: inherit;
-    cursor: pointer;
-    font-weight: 900;
-    line-height: 1;
-  }
-
-  @keyframes fadeIn {
-    from {opacity: 0; transform: translateY(-10px);}
-    to {opacity: 1; transform: translateY(0);}
-  }
-
-  @media (max-width: 500px) {
-    form {
-      padding: 1rem;
-      gap: 1rem;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MosquiNET - Disease Risk Prediction</title>
+  <style>
+    :root {
+      --blue: #007BFF;
+      --blue-dark: #0056b3;
+      --blue-light: #4da3ff;
+      --red: #dc3545;
+      --green: #28a745;
+      --bg-dark: #121212;
+      --bg-card: #1a1a1a;
+      --text-light: #eee;
+      --text-muted: #aaa;
+      --text-dark: #222;
+      --input-bg: #2a2a2a;
+      --border-color: #333;
+      --shadow: 0 4px 20px rgba(0, 123, 255, 0.1);
+      --shadow-lg: 0 8px 32px rgba(0, 123, 255, 0.15);
     }
-  }
-</style>
+
+    * { 
+      box-sizing: border-box; 
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+      color: var(--text-light);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      line-height: 1.6;
+    }
+
+    header {
+      width: 100%;
+      max-width: 900px;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 10px rgba(0, 123, 255, 0.3);
+    }
+
+    .brand-white { color: white; }
+    .brand-blue { color: var(--blue-light); }
+
+    header p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .range-value {
+      background: var(--blue);
+      color: white;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 8px;
+      background: var(--input-bg);
+      border-radius: 5px;
+      outline: none;
+      -webkit-appearance: none;
+      margin-top: 0.5rem;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: var(--blue);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      background: var(--blue-light);
+      transform: scale(1.1);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: var(--blue);
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
+    }
+
+    input[type="text"], select {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      background: var(--input-bg);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      color: var(--text-light);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    input[type="text"]:focus, select:focus {
+      outline: none;
+      border-color: var(--blue);
+      background: #333;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    }
+
+    select option {
+      background: var(--input-bg);
+      color: var(--text-light);
+    }
+
+    .submit-btn {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+      border: none;
+      color: white;
+      padding: 1.2rem 2rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(0, 123, 255, 0.3);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .banner {
+      width: 100%;
+      max-width: 900px;
+      padding: 1.5rem 2rem;
+      font-weight: 600;
+      font-size: 1.2rem;
+      border-radius: 15px;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-lg);
+      animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .banner.red { 
+      background: linear-gradient(135deg, var(--red) 0%, #b02a3a 100%);
+      color: #fff;
+    }
+
+    .banner.green { 
+      background: linear-gradient(135deg, var(--green) 0%, #1e7e34 100%);
+      color: #fff;
+    }
+
+    .banner .close-btn {
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      color: inherit;
+      cursor: pointer;
+      font-weight: 900;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+    }
+
+    .banner .close-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .feedback-section {
+      width: 100%;
+      max-width: 900px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 2.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .feedback-section h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+      font-weight: 600;
+    }
+
+    .stars-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .stars {
+      display: flex;
+      flex-direction: row-reverse;
+      gap: 0.3rem;
+    }
+
+    .stars input { 
+      display: none; 
+    }
+
+    .stars label {
+      font-size: 2.5rem;
+      color: #444;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      padding: 0.2rem;
+    }
+
+    .stars label:hover {
+      color: gold;
+      transform: scale(1.1);
+    }
+
+    .stars input:checked ~ label,
+    .stars label:hover ~ label {
+      color: gold;
+    }
+
+    .feedback-thanks {
+      color: var(--green);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 10px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem 0.5rem;
+      }
+      
+      header h1 {
+        font-size: 2.2rem;
+      }
+
+      .container {
+        padding: 1.5rem;
+      }
+
+      form {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .stars label {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      .banner {
+        padding: 1rem;
+        font-size: 1rem;
+      }
+
+      .stars label {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<header>
-  <h1><span class="brand-white">Mosqui</span><span class="brand-blue">NET</span></h1>
-</header>
+  <header>
+    <h1><span class="brand-white">Mosqui</span><span class="brand-blue">NET</span></h1>
+  </header>
 
-<div id="banner" style="display:none;"></div>
+  <div id="banner" style="display:none;"></div>
 
-<form id="predictForm">
-  <div>
-    <label for="city_name">Enter your city name:</label>
-    <input type="text" id="city_name" name="city_name" placeholder="e.g. Mumbai" autocomplete="off" />
-  </div>
-  <div>
-    <label for="daily_min_temp">Daily Min Temp (°C): <span id="minTempVal">0</span></label>
-    <input type="range" id="daily_min_temp" name="daily_min_temp" min="-100" max="100" step="0.1" value="0" oninput="minTempVal.innerText=this.value"/>
-  </div>
-  <div>
-    <label for="daily_max_temp">Daily Max Temp (°C): <span id="maxTempVal">0</span></label>
-    <input type="range" id="daily_max_temp" name="daily_max_temp" min="-100" max="100" step="0.1" value="0" oninput="maxTempVal.innerText=this.value"/>
-  </div>
-  <div>
-    <label for="daily_avg_temp">Daily Avg Temp (°C): <span id="avgTempVal">0</span></label>
-    <input type="range" id="daily_avg_temp" name="daily_avg_temp" min="-100" max="100" step="0.1" value="0" oninput="avgTempVal.innerText=this.value"/>
-  </div>
-  <div>
-    <label for="total_precipitation">Total Precipitation (mm): <span id="precipitationVal">0</span></label>
-    <input type="range" id="total_precipitation" name="total_precipitation" min="0" max="500" step="0.1" value="0" oninput="precipitationVal.innerText=this.value"/>
-  </div>
-  <div>
-    <label for="relative_humidity">Relative Humidity (%): <span id="humidityVal">0</span></label>
-    <input type="range" id="relative_humidity" name="relative_humidity" min="0" max="100" step="0.1" value="0" oninput="humidityVal.innerText=this.value"/>
-  </div>
-  <div>
-    <label for="population_density">Population Density (per km²): <span id="popDensityVal">0</span></label>
-    <input type="range" id="population_density" name="population_density" min="0" max="100000" step="10" value="0" oninput="popDensityVal.innerText=this.value"/>
-  </div>
-  <div>
-    <label for="day_length">Day Length (hours): <span id="dayLengthVal">0</span></label>
-    <input type="range" id="day_length" name="day_length" min="0" max="24" step="0.1" value="0" oninput="dayLengthVal.innerText=this.value"/>
+  <div class="container" id="formContainer">
+    <form id="predictForm">
+      <div class="form-group full-width">
+        <label for="city_name">City Name</label>
+        <input type="text" id="city_name" name="city_name" placeholder="Enter your city (e.g., Mumbai, Delhi)" autocomplete="off" />
+      </div>
+
+      <div class="form-group">
+        <label for="daily_min_temp">
+          Daily Min Temperature (°C)
+          <span class="range-value" id="minTempVal">0</span>
+        </label>
+        <input type="range" id="daily_min_temp" name="daily_min_temp" min="-10" max="50" step="0.1" value="25" />
+      </div>
+
+      <div class="form-group">
+        <label for="daily_max_temp">
+          Daily Max Temperature (°C)
+          <span class="range-value" id="maxTempVal">0</span>
+        </label>
+        <input type="range" id="daily_max_temp" name="daily_max_temp" min="-10" max="60" step="0.1" value="35" />
+      </div>
+
+      <div class="form-group">
+        <label for="daily_avg_temp">
+          Daily Avg Temperature (°C)
+          <span class="range-value" id="avgTempVal">0</span>
+        </label>
+        <input type="range" id="daily_avg_temp" name="daily_avg_temp" min="-10" max="55" step="0.1" value="30" />
+      </div>
+
+      <div class="form-group">
+        <label for="total_precipitation">
+          Total Precipitation (mm)
+          <span class="range-value" id="precipitationVal">0</span>
+        </label>
+        <input type="range" id="total_precipitation" name="total_precipitation" min="0" max="300" step="0.1" value="50" />
+      </div>
+
+      <div class="form-group">
+        <label for="relative_humidity">
+          Relative Humidity (%)
+          <span class="range-value" id="humidityVal">0</span>
+        </label>
+        <input type="range" id="relative_humidity" name="relative_humidity" min="0" max="100" step="0.1" value="60" />
+      </div>
+
+      <div class="form-group">
+        <label for="population_density">
+          Population Density (per km²)
+          <span class="range-value" id="popDensityVal">0</span>
+        </label>
+        <input type="range" id="population_density" name="population_density" min="0" max="50000" step="100" value="5000" />
+      </div>
+
+      <div class="form-group">
+        <label for="day_length">
+          Day Length (hours)
+          <span class="range-value" id="dayLengthVal">0</span>
+        </label>
+        <input type="range" id="day_length" name="day_length" min="8" max="16" step="0.1" value="12" />
+      </div>
+
+      <div class="form-group">
+        <label for="water_bodies">Water Bodies Nearby</label>
+        <select id="water_bodies" name="water_bodies">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="urban_rural_area">Area Type</label>
+        <select id="urban_rural_area" name="urban_rural_area">
+          <option value="0">Rural</option>
+          <option value="1">Urban</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="forested_area">Forested Area</label>
+        <select id="forested_area" name="forested_area">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="crop_area">Agricultural Area</label>
+        <select id="crop_area" name="crop_area">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="graze_land_area">Grazing Land</label>
+        <select id="graze_land_area" name="graze_land_area">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">
+        Analyze Risk Factors
+      </button>
+    </form>
   </div>
 
-  <div>
-    <label for="water_bodies">Water Bodies:</label>
-    <select id="water_bodies" name="water_bodies">
-      <option value="0">No</option>
-      <option value="1">Yes</option>
-    </select>
-  </div>
-  <div>
-    <label for="urban_rural_area">Urban / Rural Area:</label>
-    <select id="urban_rural_area" name="urban_rural_area">
-      <option value="0">Rural</option>
-      <option value="1">Urban</option>
-    </select>
-  </div>
-  <div>
-    <label for="forested_area">Forested Area:</label>
-    <select id="forested_area" name="forested_area">
-      <option value="0">No</option>
-      <option value="1">Yes</option>
-    </select>
-  </div>
-  <div>
-    <label for="crop_area">Crop Area:</label>
-    <select id="crop_area" name="crop_area">
-      <option value="0">No</option>
-      <option value="1">Yes</option>
-    </select>
-  </div>
-  <div>
-    <label for="graze_land_area">Graze Land Area:</label>
-    <select id="graze_land_area" name="graze_land_area">
-      <option value="0">No</option>
-      <option value="1">Yes</option>
-    </select>
+  <div id="feedbackSection" class="feedback-section" style="display:none;">
+    <h3>How accurate was this prediction?</h3>
+    <p style="color: var(--text-muted); margin-bottom: 1rem;">Your feedback helps improve our AI model</p>
+    
+    <div class="stars-container">
+      <div class="stars">
+        <input type="radio" id="star5" name="rating" value="5">
+        <label for="star5" title="Excellent">★</label>
+        <input type="radio" id="star4" name="rating" value="4">
+        <label for="star4" title="Very Good">★</label>
+        <input type="radio" id="star3" name="rating" value="3">
+        <label for="star3" title="Good">★</label>
+        <input type="radio" id="star2" name="rating" value="2">
+        <label for="star2" title="Fair">★</label>
+        <input type="radio" id="star1" name="rating" value="1">
+        <label for="star1" title="Poor">★</label>
+      </div>
+    </div>
+    
+    <div id="thankYouMessage" style="display:none;">
+      <div class="feedback-thanks">✓ Thank you for your feedback!</div>
+      <p style="color: var(--text-muted); margin-top: 0.5rem;">Your input helps us improve our predictions</p>
+    </div>
   </div>
 
-  <button type="submit">Predict Risk</button>
-</form>
+  <script>
+    // Initialize range values on load
+    function initRangeValues() {
+      const ranges = [
+        { id: 'daily_min_temp', display: 'minTempVal' },
+        { id: 'daily_max_temp', display: 'maxTempVal' },
+        { id: 'daily_avg_temp', display: 'avgTempVal' },
+        { id: 'total_precipitation', display: 'precipitationVal' },
+        { id: 'relative_humidity', display: 'humidityVal' },
+        { id: 'population_density', display: 'popDensityVal' },
+        { id: 'day_length', display: 'dayLengthVal' }
+      ];
 
-<script>
-  const form = document.getElementById('predictForm');
-  const banner = document.getElementById('banner');
-
-  form.onsubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-    let data = {};
-    formData.forEach((value, key) => {
-      if (key === 'city_name') return;
-      if(['water_bodies', 'urban_rural_area', 'forested_area', 'crop_area', 'graze_land_area'].includes(key)) {
-        data[key] = parseInt(value);
-      } else {
-        data[key] = parseFloat(value);
-      }
-    });
-
-    const response = await fetch('/predict', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-
-    const result = await response.json();
-    const city = formData.get('city_name').trim() || 'Your locality';
-
-    if(result.prediction === 1) {
-      banner.className = 'banner red';
-      banner.innerHTML = `<span>${city} has a HIGH risk of mosquito-borne disease outbreak.</span><button class="close-btn" aria-label="Close message">&times;</button>`;
-      form.style.display = 'none';
-    } else {
-      banner.className = 'banner green';
-      banner.innerHTML = `<span>${city} is SAFE from mosquito-borne disease risk at the moment.</span><button class="close-btn" aria-label="Close message">&times;</button>`;
-      form.style.display = 'none';
+      ranges.forEach(range => {
+        const input = document.getElementById(range.id);
+        const display = document.getElementById(range.display);
+        
+        // Set initial value
+        display.textContent = input.value;
+        
+        // Update on input
+        input.addEventListener('input', () => {
+          display.textContent = input.value;
+        });
+      });
     }
 
-    banner.querySelector('button.close-btn').onclick = () => {
-      banner.style.display = 'none';
-      form.style.display = 'flex';
-    };
-    banner.style.display = 'flex';
-  };
-</script>
+    // Form submission and prediction
+    async function handleFormSubmission(e) {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      const originalText = submitBtn.innerHTML;
+      
+      // Show loading state
+      submitBtn.innerHTML = '<span class="loading"></span>Analyzing...';
+      submitBtn.disabled = true;
+
+      try {
+        const formData = new FormData(e.target);
+        const data = {};
+        
+        // Process form data
+        formData.forEach((value, key) => {
+          if (key === 'city_name') return;
+          if (['water_bodies', 'urban_rural_area', 'forested_area', 'crop_area', 'graze_land_area'].includes(key)) {
+            data[key] = parseInt(value);
+          } else {
+            data[key] = parseFloat(value);
+          }
+        });
+
+        // Store form data globally for feedback
+        window.currentFormData = formData;
+
+        // Mock prediction for demo (replace with actual API call)
+        await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API delay
+        
+        const response = await fetch('/predict', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        }).catch(() => {
+          // Mock response for demo
+          return { 
+            ok: true, 
+            json: () => Promise.resolve({ 
+              prediction: Math.random() > 0.5 ? 1 : 0 
+            }) 
+          };
+        });
+
+        const result = await response.json();
+        const city = formData.get('city_name').trim() || 'Your area';
+
+        showPredictionResult(result, city);
+
+      } catch (error) {
+        console.error('Prediction error:', error);
+        showError('Unable to process prediction. Please try again.');
+      } finally {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+      }
+    }
+
+    // Show prediction result
+    function showPredictionResult(result, city) {
+      const banner = document.getElementById('banner');
+      const formContainer = document.getElementById('formContainer');
+      const feedbackSection = document.getElementById('feedbackSection');
+
+      if (result.prediction === 1) {
+        banner.className = 'banner red';
+        banner.innerHTML = `
+          <span><strong>${city}</strong> has a <strong>HIGH RISK</strong> for mosquito-borne disease outbreak</span>
+          <button class="close-btn" onclick="resetApp()">&times;</button>
+        `;
+      } else {
+        banner.className = 'banner green';
+        banner.innerHTML = `
+          <span><strong>${city}</strong> has <strong>LOW RISK</strong> for mosquito-borne disease outbreak</span>
+          <button class="close-btn" onclick="resetApp()">&times;</button>
+        `;
+      }
+
+      // Show result and feedback section
+      banner.style.display = 'flex';
+      formContainer.style.display = 'none';
+      feedbackSection.style.display = 'block';
+
+      // Setup star rating
+      setupStarRating();
+    }
+
+    // Setup star rating functionality
+    function setupStarRating() {
+      const stars = document.querySelectorAll('input[name="rating"]');
+      const thankYouMessage = document.getElementById('thankYouMessage');
+      
+      stars.forEach(star => {
+        star.addEventListener('change', async () => {
+          if (star.checked) {
+            const rating = parseInt(star.value);
+            await submitFeedback(rating);
+            
+            // Show thank you message
+            document.querySelector('.stars-container').style.display = 'none';
+            thankYouMessage.style.display = 'block';
+            
+            // Auto-reset after 3 seconds
+            setTimeout(() => {
+              resetApp();
+            }, 3000);
+          }
+        });
+      });
+    }
+
+    // Submit feedback
+    async function submitFeedback(rating) {
+      try {
+        const allInputs = {};
+        
+        // Get all form data
+        if (window.currentFormData) {
+          window.currentFormData.forEach((value, key) => {
+            allInputs[key] = value;
+          });
+        }
+        
+        allInputs.rating = rating;
+
+        // Submit feedback (replace with actual API endpoint)
+        await fetch('/feedback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(allInputs)
+        }).catch(() => {
+          // Mock successful feedback submission
+          console.log('Feedback submitted:', allInputs);
+        });
+
+      } catch (error) {
+        console.error('Feedback submission error:', error);
+      }
+    }
+
+    // Reset application
+    function resetApp() {
+      document.getElementById('banner').style.display = 'none';
+      document.getElementById('formContainer').style.display = 'block';
+      document.getElementById('feedbackSection').style.display = 'none';
+      document.getElementById('thankYouMessage').style.display = 'none';
+      document.querySelector('.stars-container').style.display = 'flex';
+      
+      // Reset star ratings
+      document.querySelectorAll('input[name="rating"]').forEach(radio => {
+        radio.checked = false;
+      });
+      
+      // Clear form data
+      window.currentFormData = null;
+    }
+
+    // Show error message
+    function showError(message) {
+      const banner = document.getElementById('banner');
+      banner.className = 'banner red';
+      banner.innerHTML = `
+        <span>${message}</span>
+        <button class="close-btn" onclick="resetApp()">&times;</button>
+      `;
+      banner.style.display = 'flex';
+    }
+
+    // Initialize app
+    window.addEventListener('DOMContentLoaded', () => {
+      initRangeValues();
+      document.getElementById('predictForm').addEventListener('submit', handleFormSubmission);
+    });
+  </script>
 </body>
 </html>

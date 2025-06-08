@@ -175,6 +175,24 @@ To explore enhanced generalization and leverage pretrained knowledge, a **Transf
 - This performance matched or exceeded top-performing traditional models like LGBM and CatBoost.
 - These results confirm the potential of transfer learning in environmental and climate-related health risk predictions.
 
+Here’s the **Ensemble Modeling Strategy** section rewritten using bullet points for clarity:
+
+---
+
+### 7.4. Ensemble Modeling Strategy
+
+* Implemented a **simple ensemble selection mechanism** to choose the best model dynamically at runtime.
+* Compared performance between:
+
+  * A **traditional machine learning model**.
+  * A **transfer learning-based TabNet model**.
+* Evaluation was conducted on the **same preprocessed dataset** for a fair comparison.
+* The model with the **higher accuracy** was selected to make final predictions.
+* This approach ensured:
+
+  * **Flexibility** by avoiding hardcoded model selection.
+  * **Robustness** in deployment by always choosing the better-performing model.
+
 ---
 
 ## 8. Pipeline
@@ -313,6 +331,22 @@ The following standard classification metrics were employed to evaluate and comp
 * **Method**: `POST`
 * **Input format**: JSON
 * **Output**: JSON response with predicted value
+
+Here's a bullet-point version of that concept for your README:
+
+---
+
+### 10.4 Feedback-Driven Model Improvement
+
+* Integrated a **user feedback mechanism** post-prediction to collect real-world inputs.
+* Users rate the system's prediction quality using a **star-based interface** (1–5 stars).
+* Feedback is logged in a **`feedback.csv`** file for further analysis.
+* This data can be:
+
+  * Used to **retrain or fine-tune** the model with real-world feedback.
+  * Analyzed to detect **patterns in model inaccuracies**.
+* The mechanism helps create a **continuous learning loop** for performance enhancement over time.
+* Ensures the AI system remains **adaptive and user-informed** even after deployment.
 
 #### 📥 **Input Images**
 

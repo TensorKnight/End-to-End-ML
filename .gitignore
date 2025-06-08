@@ -9,3 +9,5 @@ src/pipeline/__pycache__
 artifacts
 catboost_info
 rough.txt
+deployment0
+deployment/feedback/feedback.csv
